@@ -7,8 +7,13 @@ pipeline {
             steps {
                 dir('backend') {
                     bat 'npm install'
-                    'npm install -g pm2'
+                    
                 }
+            }
+        }
+    stage('Install PM2') {
+         steps {
+              bat 'npm install -g pm2'
             }
         }
 
