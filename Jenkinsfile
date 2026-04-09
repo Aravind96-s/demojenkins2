@@ -3,17 +3,17 @@ pipeline {
 
     stages {
 
-        stage('Install Backend') {
+        stage('Install Backend Dependencies') {
             steps {
                 dir('backend') {
                     bat 'npm install'
-                    
                 }
             }
         }
-    stage('Install PM2') {
-         steps {
-              bat 'npm install -g pm2'
+
+        stage('Install PM2') {
+            steps {
+                bat 'npm install -g pm2'
             }
         }
 
@@ -26,8 +26,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                pm2 delete backend-app || echo "New instance"
-                pm2 start app.js --name "backend-app"
+                echo Stopping old app...
+                call pm2 delete backend-app || echo No existing app
+
+                echo Starting new app...
+                call pm2 start backend\\app.js --name backend-app
+
+                echo Saving PM2 process...
+                call pm2 save
+
                 exit 0
                 '''
             }
