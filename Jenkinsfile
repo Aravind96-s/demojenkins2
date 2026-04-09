@@ -26,15 +26,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                echo Stopping old app...
-                call pm2 delete backend-app || echo No existing app
-
-                echo Starting new app...
-                call pm2 start backend\\app.js --name backend-app
-
-                echo Saving PM2 process...
-                call pm2 save
-
+                echo Running deploy script...
+                call deploy.bat
                 exit 0
                 '''
             }
