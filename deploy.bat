@@ -1,28 +1,14 @@
 @echo off
+:: 1. Define the Home path for the SYSTEM user so PM2 works correctly
+set PM2_HOME=C:\.pm2
+set HOMEDRIVE=C:
+set HOMEPATH=\Users\Public
 
-:: Ensure Node.js and npm global packages (PM2) are in PATH
+:: 2. Set the path for Node and PM2
 set PATH=%PATH%;%AppData%\npm;C:\Program Files\nodejs
 
-echo ==============================
-echo Stopping old app (if running)...
-echo ==============================
-call pm2 delete backend-app || echo No existing app to delete
-
-echo ==============================
-echo Moving to project directory...
-echo ==============================
-cd /d C:\ProgramData\Jenkins\.jenkins\workspace\demo
-
-echo ==============================
-echo Starting new app with PM2...
-echo ==============================
-call pm2 start backend\app.js --name backend-app
-
-echo ==============================
-echo Saving PM2 process...
-echo ==============================
+:: 3. Run the deployment
+echo Restarting App...
+call pm2 delete backend-app || echo "First run"
+call pm2 start backend/app.js --name "backend-app" --watch
 call pm2 save
-
-echo ==============================
-echo Deployment completed!
-echo ==============================
