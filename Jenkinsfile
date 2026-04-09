@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                   echo Starting app...
-                  cd /d C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\demo
+                  cd /d C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\demo1
                   start /B node app.js
 
             }
