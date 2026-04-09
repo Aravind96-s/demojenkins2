@@ -25,11 +25,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat '''
-                echo Running deploy script...
-                call deploy.bat
-                exit 0
-                '''
+                  echo Starting app...
+                  cd /d C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\demo
+                  start /B node app.js
+
             }
         }
     }
