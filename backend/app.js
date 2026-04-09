@@ -12,7 +12,7 @@ app.get('/api', (req, res) => {
 });
 
 // Home route fallback
-app.get('/', (req, res) => {
+app.get('/load', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
