@@ -7,6 +7,7 @@ pipeline {
             steps {
                 dir('backend') {
                     bat 'npm install'
+                    'npm install -g pm2'
                 }
             }
         }
@@ -20,9 +21,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                set JENKINS_NODE_COOKIE=dontKillMe
-                start "" node app.js
-
+                pm2 delete backend-app || echo "New instance"
+                pm2 start app.js --name "backend-app"
                 exit 0
                 '''
             }
