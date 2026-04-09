@@ -20,11 +20,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                echo Killing old node process...
-                taskkill /F /IM node.exe || echo No process
-
-                echo Starting full stack app...
-                start "" cmd /k "cd /d C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\demo\\backend && node app.js"
+                set JENKINS_NODE_COOKIE=dontKillMe
+                start "" node app.js
 
                 exit 0
                 '''
