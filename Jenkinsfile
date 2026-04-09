@@ -28,8 +28,6 @@ pipeline {
                 bat '''
                 echo Running deploy script...
                 call deploy.bat
-                cd /d C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\demo
-                start /B node app.js
                 exit 0
                 '''
             }
